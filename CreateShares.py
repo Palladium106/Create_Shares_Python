@@ -89,11 +89,11 @@ with codecs.open('Users.csv', 'rb', 'utf-16') as file:
 		ous = row['DN'].split(',')
 		#Reversing DN field for the right order of OU sequence
 		ous.reverse()
-		#Deleting all OUs list before root OU index and deleting all elements that not contains 'OU='
+		#Deleting all OUs list before root OU index and deleting all elements that not contains 'OU='. Joinong list to users OU path.
 		ous = ous[ous.index(OU)+1::]
 		ous = list(x.replace('OU=', '') for x in ous if x.find('OU=') != -1)
 		ous = '\\'.join(ous)
-		
+		#Writing out users to the list
 		curruser = [row['sAMAccountName'], row['department'], row['title'], ous, row['givenName'], row['sn']]
 		userslist.append(curruser)
 	#Creating root share folder
