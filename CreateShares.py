@@ -23,11 +23,9 @@ def assign_acls (users: list, folder, rights, inherit):
 		'L': con.FILE_LIST_DIRECTORY
 
 	}
-	#'16' means 'INHERITED_ACE'. Suddenly I didnt found its value in the 'ntsecuritycon'
 	inheritance = {
 		'': 0,
 		'I': con.OBJECT_INHERIT_ACE | con.CONTAINER_INHERIT_ACE,
-		# 'I': 16 | con.OBJECT_INHERIT_ACE | con.CONTAINER_INHERIT_ACE,
 	}
 	#Getting DACL's
 	sd = win32security.GetFileSecurity(folder, win32security.DACL_SECURITY_INFORMATION)
@@ -61,9 +59,9 @@ print('FQDN: ' + FQDN)
 #Administrator rights users
 admins = config["general"]["admins"].split(',')
 print('Admins list: ' + str(admins))
-#Administrator rights users
+#List only rights users
 listgroup = config["general"]["listgroup"]
-print('List access group name: ' + str(listgroup))
+print('List only access group name: ' + str(listgroup))
 #Managers of departments key words
 managers = config["general"]["managers"].split(',')
 print('Managers list: ' + str(managers))
